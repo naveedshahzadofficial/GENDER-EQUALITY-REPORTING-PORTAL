@@ -1,0 +1,92 @@
+@font-face {
+    font-family: 'poppinsbold';
+    src: url('../fonts/poppins-bold-webfont.woff2') format('woff2'),
+    url('../fonts/poppins-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'poppinsregular';
+    src: url('../fonts/poppins-regular-webfont.woff2') format('woff2'),
+    url('../fonts/poppins-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+.auth-bg {
+    background-image: url(../media/bg/bg-image.jpg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.login.login-3 .login-content {
+    background: transparent;
+}
+
+.auth-logo-heading-main{
+    font-family: 'poppinsbold';
+    font-size: 40px;
+    color: #ff3a21;
+    line-height: 42px;
+}
+.auth-logo-slogan{
+    font-family: 'poppinsregular';
+    font-size: 27px;
+    color: #ff3a21;
+}
+
+.auth-form-label {
+    font-size: 14pt;
+    color: #ff3a21 !important;
+    font-family: 'poppinsregular';
+}
+
+.auth-form-heading {
+    font-weight: bold;
+    color: #ff3a21 !important;
+    font-family: 'poppinsbold';
+}
+
+.auth-form-a {
+    font-size: 10pt;
+    color: #ff3a21 !important;
+    font-family: 'poppinsregular';
+}
+
+.auth-login-btn{
+    font-family: 'poppinsbold';
+    color: #fff !important;
+    font-weight: bold;
+    background-color:#ff3a21 !important;
+    border-color: #ff3a21 !important;
+}
+
+.auth-left-footer{
+    text-align: left;
+    margin-left: 30px;
+    font-size: 10px;
+    color: #fff;
+    font-family:  'poppinsregular';
+}
+.auth-right-footer{
+    font-size: 10px;
+    color: #ff3a21;
+    font-family:  'poppinsregular';
+}
+.auth-right-footer a{
+    color: #ff3a21 !important;
+}
+.login.login-4 .login-form {
+    width: 100%;
+    max-width: 100% !important;
+}
+.form-control, .form-control:focus{
+    background-color: #e6e6e6;
+}

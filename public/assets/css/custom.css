@@ -1,0 +1,72 @@
+@font-face {
+    font-family: 'poppinsbold';
+    src: url('../fonts/poppins-bold-webfont.woff2') format('woff2'),
+    url('../fonts/poppins-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'poppinsregular';
+    src: url('../fonts/poppins-regular-webfont.woff2') format('woff2'),
+    url('../fonts/poppins-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+.color-red-700 {
+    color: #d32f2f !important;
+}
+
+div.dt-buttons {
+    float: right !important;
+}
+div.dt-buttons button{
+    background-image: none !important;
+    background-color: transparent !important;
+    border: transparent !important;
+    padding: 5px !important;
+}
+
+.fa-file-pdf{
+    color: #ff0801 !important;
+}
+
+.fa-file-excel,.fa-file-text, .fa-file-csv {
+    color: #0b9444 !important;
+}
+
+.dashboard-logo-heading-main{
+    font-family: 'poppinsbold';
+    font-size: 40px;
+    color: #fff;
+    margin-top: 10px;
+}
+.dashboard-logo-sub-heading-main{
+    font-family: 'poppinsbold';
+    font-size: 22px;
+    line-height: 12px;
+    color: #ff3a21;
+}
+.dashboard-logo-slogan{
+    font-family: 'poppinsregular';
+    font-size: 18px;
+    color: #000;
+}
+.custom-btn-card{
+    color: #ff3a21 !important;
+    background-color: #fff !important;
+    border-color: #eeeaea !important;
+}
+.custom-btn-card:hover{
+    background-color: #b7b4b4 !important;
+}
+.custom-btn-form{
+    color: #fff !important;;
+    background-color: #ff3a21 !important;
+    border-color: #e5351f !important;
+}
+.custom-btn-form:hover{
+    background-color: #bb3323 !important;
+}
