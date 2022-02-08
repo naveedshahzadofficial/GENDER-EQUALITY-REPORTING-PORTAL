@@ -72,6 +72,9 @@ class AnnualDevelopmentProject extends Model
             case 'disability':
                 $this->attributes[$key] = !empty($value)?str_replace(',','', $value):null;
                     break;
+            case 'status':
+                $this->attributes[$key] = $value;;
+                break;
             default:
                 $this->attributes[$key] = !empty($value)?$value:null;
                 break;

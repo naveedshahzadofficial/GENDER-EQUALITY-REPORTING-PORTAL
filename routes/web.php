@@ -10,7 +10,8 @@ use App\Http\Controllers\ {
     ProjectTypeController,
     AnnualDevelopmentProjectController,
     IndicatorController,
-    PoliceDepartmentViolenceController
+    PoliceDepartmentViolenceController,
+    FederalAgencyViolenceController
 };
 /*
 |--------------------------------------------------------------------------
@@ -42,5 +43,6 @@ Route::group(['middleware'=>['auth'] ] ,function() {
     Route::resource('annual-development-projects', AnnualDevelopmentProjectController::class);
     Route::resource('indicators', IndicatorController::class);
     Route::resource('police-department-violences', PoliceDepartmentViolenceController::class);
+    Route::resource('federal-agency-violences', FederalAgencyViolenceController::class);
 
 });

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use phpDocumentor\Reflection\Types\False_;
 
 class FederalAgencyViolence extends Model
 {
@@ -32,8 +33,12 @@ class FederalAgencyViolence extends Model
 
     public function setAttribute($key, $value)
     {
-        $this->attributes[$key] = !empty($value) || $value=='0'?str_replace(',','', $value):null;
+        if($key != 'status')
+        $this->attributes[$key] = !empty($value) || $value == '0' ?str_replace(',','', $value):null;
+        else
+        $this->attributes[$key] = $value;
     }
+
     public static function boot()
     {
         parent::boot();

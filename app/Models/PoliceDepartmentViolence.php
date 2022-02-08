@@ -35,7 +35,10 @@ class PoliceDepartmentViolence extends Model
 
     public function setAttribute($key, $value)
     {
-        $this->attributes[$key] = !empty($value) || $value=='0'?str_replace(',','', $value):null;
+        if($key != 'status')
+            $this->attributes[$key] = !empty($value) || $value == '0' ?str_replace(',','', $value):null;
+        else
+            $this->attributes[$key] = $value;
     }
     public static function boot()
     {
