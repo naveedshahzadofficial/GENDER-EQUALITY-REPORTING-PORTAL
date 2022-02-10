@@ -59,6 +59,15 @@
                             </div>
 
                             <div class="row mt-10">
+                                <div class="col-md-12">
+                                    <div class="static-info row">
+                                        <div class="col-md-3 name"><strong>Project Target:</strong></div>
+                                        <div class="col-md-9 value">{{ optional($annualDevelopmentProject->target)->target_value }}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-10">
 
                                 <div class="col-md-6">
                                     <div class="static-info row">

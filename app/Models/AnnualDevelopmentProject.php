@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class AnnualDevelopmentProject extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = ['user_id', 'department_id', 'project_id', 'project_type_id',
+    protected $fillable = ['user_id', 'department_id', 'project_id', 'project_type_id', 'target_id',
         'project_document_file', 'total_approved_budget', 'project_start_date',
         'project_end_date', 'total_expenditure', 'beneficiary_male',
         'beneficiary_female', 'beneficiary_trans_gender', 'beneficiary_total',
@@ -36,6 +36,11 @@ class AnnualDevelopmentProject extends Model
     public function projectType(): BelongsTo
     {
         return $this->belongsTo(ProjectType::class);
+    }
+
+    public function target(): BelongsTo
+    {
+        return $this->belongsTo(Target::class);
     }
 
     public function projectBudgets(): HasMany

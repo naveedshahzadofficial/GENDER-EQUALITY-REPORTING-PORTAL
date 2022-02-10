@@ -9,6 +9,7 @@ use App\Models\Department;
 use App\Models\Project;
 use App\Models\ProjectProgressReport;
 use App\Models\ProjectType;
+use App\Models\Target;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -39,6 +40,9 @@ class AnnualDevelopmentProjectController extends Controller
                 ->addColumn('project_type_title', function (AnnualDevelopmentProject $annualDevelopmentProject) {
                     return optional($annualDevelopmentProject->projectType)->project_type_title;
                 })
+                ->addColumn('target_value', function (AnnualDevelopmentProject $annualDevelopmentProject) {
+                    return optional($annualDevelopmentProject->target)->target_value;
+                })
                 ->editColumn('project_document_file', function (AnnualDevelopmentProject $annualDevelopmentProject) {
                     return '<a target="_blank" href="'.Storage::url($annualDevelopmentProject->project_document_file).'" title="Attachment" class="btn btn-icon btn-outline-danger btn-circle btn-sm"/><i class="flaticon2-download"></i></a>';
                 })
@@ -53,7 +57,7 @@ class AnnualDevelopmentProjectController extends Controller
                     }
                     return $actionBtn;
                 })
-                ->rawColumns(['department_name', 'project_title', 'project_type_title', 'project_document_file', 'status', 'action'])
+                ->rawColumns(['department_name', 'project_title', 'project_type_title','target_value', 'project_document_file', 'status', 'action'])
                 ->make(true);
         }
 
@@ -70,7 +74,8 @@ class AnnualDevelopmentProjectController extends Controller
         $departments = Department::where('status', 1)->get(['id', 'department_name']);
         $projects = Project::where('status', 'Active')->get();
         $project_types = ProjectType::where('status', 1)->get();
-        return view('annual-development-projects.create', compact('departments', 'projects', 'project_types'));
+        $targets = Target::where('status', 'Active')->get();
+        return view('annual-development-projects.create', compact('departments', 'projects', 'project_types', 'targets'));
     }
 
     /**
@@ -118,7 +123,7 @@ class AnnualDevelopmentProjectController extends Controller
      */
     public function show(AnnualDevelopmentProject $annualDevelopmentProject)
     {
-        $annualDevelopmentProject->load('department', 'project', 'projectType', 'projectBudgets', 'projectProgressReport');
+        $annualDevelopmentProject->load('department', 'project', 'projectType', 'target', 'projectBudgets', 'projectProgressReport');
         return view('annual-development-projects.show',compact('annualDevelopmentProject'));
     }
 
@@ -134,7 +139,8 @@ class AnnualDevelopmentProjectController extends Controller
         $departments = Department::where('status', 1)->get(['id', 'department_name']);
         $projects = Project::where('status', 'Active')->get();
         $project_types = ProjectType::where('status', 'Active')->get();
-        return view('annual-development-projects.edit', compact('departments', 'projects', 'project_types', 'annualDevelopmentProject'));
+        $targets = Target::where('status', 'Active')->get();
+        return view('annual-development-projects.edit', compact('departments', 'projects', 'project_types', 'annualDevelopmentProject', 'targets'));
     }
 
     /**

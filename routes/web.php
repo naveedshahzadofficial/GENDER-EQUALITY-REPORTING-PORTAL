@@ -11,7 +11,9 @@ use App\Http\Controllers\ {
     AnnualDevelopmentProjectController,
     IndicatorController,
     PoliceDepartmentViolenceController,
-    FederalAgencyViolenceController
+    FederalAgencyViolenceController,
+    WomenOmbudspersonViolenceController,
+    PunjabActionPlanController
 };
 /*
 |--------------------------------------------------------------------------
@@ -44,5 +46,7 @@ Route::group(['middleware'=>['auth'] ] ,function() {
     Route::resource('indicators', IndicatorController::class);
     Route::resource('police-department-violences', PoliceDepartmentViolenceController::class);
     Route::resource('federal-agency-violences', FederalAgencyViolenceController::class);
+    Route::resource('women-ombudsperson-violences', WomenOmbudspersonViolenceController::class);
+    Route::resource('punjab-action-plans', PunjabActionPlanController::class);
 
 });

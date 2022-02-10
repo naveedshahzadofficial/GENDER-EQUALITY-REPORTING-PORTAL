@@ -27,6 +27,7 @@ class StoreAnnualDevelopmentProjectRequest extends FormRequest
             'department_id'=>'required',
             'project_id'=>'required',
             'project_type_id'=>'required',
+            'target_id'=>'required',
             'project_document_file'=>'required|mimes:jpg,jpeg,png,pdf',
             'total_approved_budget'=>'required',
             'project_start_date'=>'required',

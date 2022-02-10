@@ -36,7 +36,8 @@ class PoliceDepartmentViolenceController extends Controller
                     return '<span class="label label-lg font-weight-bold label-inline '.($policeDepartmentViolence->status?'label-light-success':'label-light-danger').'">'.($policeDepartmentViolence->status?'Active':'Inactive').'</span>';
                 })
                 ->addColumn('action', function(PoliceDepartmentViolence $policeDepartmentViolence){
-                    $actionBtn ='<a href="'.route('police-department-violences.edit',$policeDepartmentViolence).'" class="btn btn-icon btn-outline-danger btn-circle btn-xs mr-2" title="Update"> <i class="flaticon2-edit"></i> </a>';
+                    $actionBtn = '<a target="_blank" href="' . route('police-department-violences.show', $policeDepartmentViolence) . '" class="btn btn-icon btn-circle btn-xs mr-2 btn-outline-danger" title="Detail"> <i class="icon-md fas fa-eye"></i> </a>';
+                    $actionBtn .='<a href="'.route('police-department-violences.edit',$policeDepartmentViolence).'" class="btn btn-icon btn-outline-danger btn-circle btn-xs mr-2" title="Update"> <i class="flaticon2-edit"></i> </a>';
                     $actionBtn .= '<a onclick="activate_inactive(this); return false;" href="' . route('police-department-violences.destroy', $policeDepartmentViolence) . '" class="btn btn-icon btn-circle btn-xs mr-2 btn-outline-danger" title="' . ($policeDepartmentViolence->status? 'Deactivate' : 'Activate') . '"> <i class="' . ($policeDepartmentViolence->status ? 'icon-md fas fa-toggle-on' : 'icon-md fas fa-toggle-off') . '"></i> </a>';
                     return $actionBtn;
                 })
@@ -82,7 +83,7 @@ class PoliceDepartmentViolenceController extends Controller
      */
     public function show(PoliceDepartmentViolence $policeDepartmentViolence)
     {
-        $policeDepartmentViolence->load('department', 'district', 'month');
+        $policeDepartmentViolence->load('department' ,'district', 'month');
         return view('police-department-violences.show',compact('policeDepartmentViolence'));
     }
 

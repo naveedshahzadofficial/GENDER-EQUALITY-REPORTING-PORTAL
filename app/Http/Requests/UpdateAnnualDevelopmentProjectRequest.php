@@ -27,6 +27,7 @@ class UpdateAnnualDevelopmentProjectRequest extends FormRequest
             'department_id'=>'required',
             'project_id'=>'required',
             'project_type_id'=>'required',
+            'target_id'=>'required',
             'project_document_file'=>'required_without:old_project_document_file|mimes:jpg,jpeg,png,pdf',
             'total_approved_budget'=>'required',
             'project_start_date'=>'required',

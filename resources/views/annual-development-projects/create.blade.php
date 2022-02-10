@@ -71,7 +71,27 @@
 
 
                             </div>
+
                             <div class="row form-group">
+
+                                <div class="col-lg-12">
+                                    <label>Project Target <span class="color-red-700">*</span></label>
+                                    <select class="form-control select2" name="target_id">
+                                        <option value="">Select Target</option>
+                                        @if(isset($targets) && !empty($targets))
+                                            @foreach($targets as $target)
+                                                <option {{ old('target_id')== $target->id ? 'selected': '' }} value="{{ $target->id }}"> {{ $target->target_value }} </option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                    @error('target_id')
+                                    <div class="error">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                            </div>
+
+                                <div class="row form-group">
                                 <div class="col-lg-6">
                                     <label>Project Document Attachment<span class="color-red-700">*</span></label>
                                     <input type="file" name="project_document_file" class="form-control" value="" />
@@ -126,7 +146,7 @@
                                         </tr>
                                         </thead>
                                         <tbody id="budget-table-data">
-                                        @for($index =0; $index<count(old('project_budgets',array())); $index++)
+                                        @for($index =0; $index<count(old('project_budgets',array(0))); $index++)
                                             <tr>
                                                 <td>
                                                     <div class="row">
@@ -389,6 +409,13 @@
                             validators: {
                                 notEmpty: {
                                     message: 'Project type is required'
+                                }
+                            }
+                        },
+                        target_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Project Target is required'
                                 }
                             }
                         },

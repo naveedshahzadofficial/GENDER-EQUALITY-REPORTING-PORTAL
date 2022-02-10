@@ -68,10 +68,27 @@
                             <div class="error">{{ $message }}</div>
                             @enderror
                         </div>
+                    </div>
 
+                    <div class="row form-group">
 
+                        <div class="col-lg-12">
+                            <label>Project Target <span class="color-red-700">*</span></label>
+                            <select class="form-control select2" name="target_id">
+                                <option value="">Select Target</option>
+                                @if(isset($targets) && !empty($targets))
+                                    @foreach($targets as $target)
+                                        <option {{ old('target_id',$annualDevelopmentProject->target_id)== $target->id ? 'selected': '' }} value="{{ $target->id }}"> {{ $target->target_value }} </option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            @error('target_id')
+                            <div class="error">{{ $message }}</div>
+                            @enderror
+                        </div>
 
                     </div>
+
                     <div class="row form-group">
                         <div class="col-lg-6">
                             <label>Project Document Attachment<span class="color-red-700">*</span>@if(!empty($annualDevelopmentProject->project_document_file))&nbsp;<a href="{{ \Illuminate\Support\Facades\Storage::url($annualDevelopmentProject->project_document_file) }}" target="_blank">View File</a> @endif</label>
@@ -129,7 +146,7 @@
                                     </thead>
                                     <tbody id="budget-table-data">
                                     @php
-                                        $project_budgets_count= $annualDevelopmentProject->projectBudgets->count() >= count(old('project_budgets',array())) ? $annualDevelopmentProject->projectBudgets->count():count(old('project_budgets',array()));
+                                        $project_budgets_count= $annualDevelopmentProject->projectBudgets->count() >= count(old('project_budgets',array(0))) ? $annualDevelopmentProject->projectBudgets->count():count(old('project_budgets',array(0)));
                                         $projectBudgets = $annualDevelopmentProject->projectBudgets;
                                     @endphp
 
@@ -158,7 +175,7 @@
                                             <td>
                                                 <div class="row">
                                                     <div class="col-lg-12">
-                                                        <input type="text" name="project_budgets[{{ $index }}][budget_utilization]" style="width: 100% !important;" class="form-control budget_utilizations money_format" placeholder="Budget Utilization (Million)" value="{{ old("project_budgets.{$index}.budget_utilization",  ($projectBudgets[$index]->budget_utilization?intval($projectBudgets[$index]->budget_utilization):'')) }}"  />
+                                                        <input type="text" name="project_budgets[{{ $index }}][budget_utilization]" style="width: 100% !important;" class="form-control budget_utilizations money_format" placeholder="Budget Utilization (Million)" value="{{ old("project_budgets.{$index}.budget_utilization",  (isset($projectBudgets[$index]->budget_utilization)?intval($projectBudgets[$index]->budget_utilization):'')) }}"  />
                                                         @error("project_budgets.{$index}.budget_utilization")
                                                         <div class="error">{{ $message }}</div>
                                                         @enderror
@@ -402,6 +419,13 @@
                                 }
                             }
                         },
+                        target_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Project Target is required'
+                                }
+                            }
+                        },
                         total_approved_budget: {
                             validators: {
                                 notEmpty: {
@@ -494,8 +518,14 @@
                 }
             });
 
+            @for($index =0; $index<$project_budgets_count; $index++)
+            fv.addField('project_budgets[{{$index}}][fiscal_year]', fiscal_years_rule);
+            fv.addField('project_budgets[{{$index}}][budget_allocation]', budget_allocations_rule);
+            fv.addField('project_budgets[{{$index}}][budget_utilization]', budget_utilizations_rule);
+            @endfor
+
         });
-        let fiscal_years = [[]];
+        let fiscal_years = @if($annualDevelopmentProject->projectBudgets->isNotEmpty()) {!! $annualDevelopmentProject->projectBudgets->toJson() !!}; @else [[]] @endif
         function loadBudgetTable(obj){
             let project_id = $(obj).val();
             $.post('{{ route('annual-development-projects.find-project') }}', {'project_id': project_id}, function (response){
