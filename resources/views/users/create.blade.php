@@ -38,7 +38,7 @@
             <div class="">
                 <div class="">
                     <!--begin::Card-->
-                    <div class="card card-custom gutter-b example example-compact">
+                    <div class="card card-custom gutter-b">
                         <div class="card-header">
                             <h3 class="card-title">User Add</h3>
 
@@ -107,7 +107,7 @@
                                 <div class="col-lg-6">
                                     <label>Role<span class="text-danger">*</span></label>
                                     <div class="">
-                                        <select class="form-control" name="role_id" id="role_id" required>
+                                        <select class="form-control select2" name="role_id" id="role_id" required>
                                             <option value="">Select Role</option>
                                             @foreach($roles as $role)
                                                 <option value="{{ $role->id }}"> {{ $role->role_name }} </option>
@@ -123,7 +123,7 @@
                                 <div class="col-lg-6">
                                     <label>Department<span class="text-danger">*</span></label>
                                     <div class="">
-                                        <select class="form-control" name="department_id" id="department_id" required>
+                                        <select class="form-control select2" name="department_id" id="department_id" required style="width: 100% !important;">
                                             <option value="">Select Department</option>
                                             @foreach($departments as $department)
                                                 <option value="{{ $department->id }}"> {{ $department->department_name }} </option>

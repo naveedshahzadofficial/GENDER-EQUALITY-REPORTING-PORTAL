@@ -75,4 +75,21 @@ class User extends Authenticatable
         return $this->belongsTo(Department::class);
     }
 
+    function isTable1(): bool
+    {
+        return in_array($this->department_id, []);
+    }
+    function isTable2(): bool
+    {
+        return in_array($this->department_id, []);
+    }
+    function isTable3(): bool
+    {
+        return in_array($this->department_id, []);
+    }
+    function isTable4(): bool
+    {
+        return in_array($this->department_id, []);
+    }
+
 }

@@ -16,7 +16,7 @@
             <div class="">
                 <div class="">
                     <!--begin::Card-->
-                    <div class="card card-custom gutter-b example example-compact">
+                    <div class="card card-custom gutter-b">
                         <div class="card-header">
                             <h3 class="card-title">Add Target</h3>
 

@@ -114,7 +114,7 @@
                                 <div class="col-lg-6">
                                     <label>Role<span class="text-danger">*</span></label>
                                     <div class="">
-                                        <select class="form-control" name="role_id" required>
+                                        <select class="form-control select2" name="role_id" required>
                                             <option selected>Select Role</option>
                                             @foreach($roles as $role)
                                             <option value="{{ $role->id }}" @if($role->id == $user->role_id) selected @endif> {{ $role->role_name }} </option>
@@ -131,7 +131,7 @@
                                 <div class="col-lg-6">
                                     <label>Department<span class="text-danger">*</span></label>
                                     <div class="">
-                                        <select class="form-control" name="department_id" required>
+                                        <select class="form-control select2" name="department_id" required style="width: 100% !important;">
                                             <option selected>Select Department</option>
                                             @foreach($departments as $department)
                                                 <option value="{{ $department->id }}" @if($department->id == $user->department_id) selected @endif> {{ $department->department_name }} </option>

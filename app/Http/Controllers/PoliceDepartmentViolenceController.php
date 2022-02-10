@@ -131,5 +131,5 @@ class PoliceDepartmentViolenceController extends Controller
             ->route('police-department-violences.index')
             ->with('success_message', 'Violence Against Children and Women status has been changed successfully.');
     }
-    
+
 }
