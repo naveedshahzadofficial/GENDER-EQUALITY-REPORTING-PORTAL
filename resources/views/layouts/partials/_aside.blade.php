@@ -142,7 +142,7 @@
                                 </li>
                                 @endif
 
-                                @if(auth()->user()->isTable1() || auth()->user()->isAdmin())
+                                @if((auth()->user()->isTable1() && auth()->user()->isFiaDepartment()) || auth()->user()->isAdmin())
                                 <li class="menu-item {{ areActiveRoutes(['police-department-violences.index','police-department-violences.create','police-department-violences.edit','police-department-violences.show']) }}" aria-haspopup="true">
                                     <a href="{{ route('police-department-violences.index') }}" class="menu-link">
 										<span class="svg-icon menu-icon">
@@ -154,12 +154,12 @@
 												</g>
 											</svg>
 										</span>
-                                        <span class="menu-text">Police Department: Violence Against Children and Women</span>
+                                        <span class="menu-text">Violence Against Children and Women</span>
                                     </a>
                                 </li>
                                 @endif
 
-                                @if(auth()->user()->isTable1() || auth()->user()->isAdmin())
+                                @if((auth()->user()->isTable1() && auth()->user()->isFiaDepartment()) || auth()->user()->isAdmin())
                                 <li class="menu-item {{ areActiveRoutes(['federal-agency-violences.index','federal-agency-violences.create','federal-agency-violences.edit','federal-agency-violences.show']) }}" aria-haspopup="true">
                                     <a href="{{ route('federal-agency-violences.index') }}" class="menu-link">
 										<span class="svg-icon menu-icon">
@@ -171,12 +171,12 @@
 												</g>
 											</svg>
 										</span>
-                                        <span class="menu-text">Federal Investigation Agency: Violence Against Women</span>
+                                        <span class="menu-text">Violence Against Women</span>
                                     </a>
                                 </li>
                                 @endif
 
-                                @if(auth()->user()->isTable1() || auth()->user()->isAdmin())
+                                @if((auth()->user()->isTable1() && auth()->user()->isOmbudspersonDepartment()) || auth()->user()->isAdmin())
                                 <li class="menu-item {{ areActiveRoutes(['women-ombudsperson-violences.index','women-ombudsperson-violences.create','women-ombudsperson-violences.edit','women-ombudsperson-violences.show']) }}" aria-haspopup="true">
                                     <a href="{{ route('women-ombudsperson-violences.index') }}" class="menu-link">
 										<span class="svg-icon menu-icon">
@@ -188,12 +188,12 @@
 												</g>
 											</svg>
 										</span>
-                                        <span class="menu-text">Women Ombudsperson: Violence Against Women</span>
+                                        <span class="menu-text">Violence Against Women</span>
                                     </a>
                                 </li>
                                 @endif
 
-                                @if(auth()->user()->isTable2() || auth()->user()->isAdmin())
+                                @if((auth()->user()->isTable2() && auth()->user()->isFiaDepartment()) || auth()->user()->isAdmin())
                                 <li class="menu-item {{ areActiveRoutes(['punjab-action-plans.index','punjab-action-plans.create','punjab-action-plans.edit','punjab-action-plans.show']) }}" aria-haspopup="true">
                                     <a href="{{ route('punjab-action-plans.index') }}" class="menu-link">
 										<span class="svg-icon menu-icon">
