@@ -85,11 +85,11 @@ class User extends Authenticatable
     }
     function isTable3(): bool
     {
-        return in_array($this->department_id, []);
+        return ! in_array($this->department_id, []);
     }
     function isTable4(): bool
     {
-        return in_array($this->department_id, []);
+        return ! in_array($this->department_id, []);
     }
 
 }
