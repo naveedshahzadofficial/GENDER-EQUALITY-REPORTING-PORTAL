@@ -18,11 +18,13 @@
                     <div class="card-title">
                         <h3 class="card-label">Punjab Action Plans</h3>
                     </div>
+                    @if(auth()->user()->isDepartment())
                         <div class="card-toolbar">
                         <!--begin::Button-->
                         <a href="{{ route('punjab-action-plans.create') }}" class="btn btn-primary bg-white btn-outline-white text-danger font-weight-bolder">New Action Plan</a>
                         <!--end::Button-->
                     </div>
+                    @endif
                 </div>
                 <div class="card-body">
                 @component('_components.alerts-default') @endcomponent

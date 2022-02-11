@@ -21,6 +21,9 @@ class WomenOmbudspersonViolenceController extends Controller
     {
         if(request()->ajax()) {
             $query = WomenOmbudspersonViolence::with('department' ,'district', 'month');
+            if(auth()->user()->isDepartment()){
+                $query->where('department_id', auth()->user()->department_id);
+            }
             return DataTables::of($query)
                 ->addIndexColumn()
                 ->addColumn('department_name', function (WomenOmbudspersonViolence $womenOmbudspersonViolence) {
@@ -36,8 +39,11 @@ class WomenOmbudspersonViolenceController extends Controller
                     return '<span class="label label-lg font-weight-bold label-inline '.($womenOmbudspersonViolence->status?'label-light-success':'label-light-danger').'">'.($womenOmbudspersonViolence->status?'Active':'Inactive').'</span>';
                 })
                 ->addColumn('action', function(WomenOmbudspersonViolence $womenOmbudspersonViolence){
-                    $actionBtn ='<a href="'.route('women-ombudsperson-violences.edit',$womenOmbudspersonViolence).'" class="btn btn-icon btn-outline-danger btn-circle btn-xs mr-2" title="Update"> <i class="flaticon2-edit"></i> </a>';
-                    $actionBtn .= '<a onclick="activate_inactive(this); return false;" href="' . route('women-ombudsperson-violences.destroy', $womenOmbudspersonViolence) . '" class="btn btn-icon btn-circle btn-xs mr-2 btn-outline-danger" title="' . ($womenOmbudspersonViolence->status? 'Deactivate' : 'Activate') . '"> <i class="' . ($womenOmbudspersonViolence->status ? 'icon-md fas fa-toggle-on' : 'icon-md fas fa-toggle-off') . '"></i> </a>';
+                    $actionBtn = '<a target="_blank" href="' . route('women-ombudsperson-violences.show', $womenOmbudspersonViolence) . '" class="btn btn-icon btn-circle btn-xs mr-2 btn-outline-danger" title="Detail"> <i class="icon-md fas fa-eye"></i> </a>';
+                    if (auth()->user()->isDepartment()) {
+                        $actionBtn .= '<a href="' . route('women-ombudsperson-violences.edit', $womenOmbudspersonViolence) . '" class="btn btn-icon btn-outline-danger btn-circle btn-xs mr-2" title="Update"> <i class="flaticon2-edit"></i> </a>';
+                        $actionBtn .= '<a onclick="activate_inactive(this); return false;" href="' . route('women-ombudsperson-violences.destroy', $womenOmbudspersonViolence) . '" class="btn btn-icon btn-circle btn-xs mr-2 btn-outline-danger" title="' . ($womenOmbudspersonViolence->status ? 'Deactivate' : 'Activate') . '"> <i class="' . ($womenOmbudspersonViolence->status ? 'icon-md fas fa-toggle-on' : 'icon-md fas fa-toggle-off') . '"></i> </a>';
+                    }
                     return $actionBtn;
                 })
                 ->rawColumns(['district_name_e','month_name','target_value','status', 'action'])

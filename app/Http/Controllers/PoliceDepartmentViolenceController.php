@@ -21,6 +21,9 @@ class PoliceDepartmentViolenceController extends Controller
     {
         if(request()->ajax()) {
             $query = PoliceDepartmentViolence::with('department' ,'district', 'month');
+            if(auth()->user()->isDepartment()){
+                $query->where('department_id', auth()->user()->department_id);
+            }
             return DataTables::of($query)
                 ->addIndexColumn()
                 ->addColumn('department_name', function (PoliceDepartmentViolence $policeDepartmentViolence) {
@@ -37,8 +40,10 @@ class PoliceDepartmentViolenceController extends Controller
                 })
                 ->addColumn('action', function(PoliceDepartmentViolence $policeDepartmentViolence){
                     $actionBtn = '<a target="_blank" href="' . route('police-department-violences.show', $policeDepartmentViolence) . '" class="btn btn-icon btn-circle btn-xs mr-2 btn-outline-danger" title="Detail"> <i class="icon-md fas fa-eye"></i> </a>';
-                    $actionBtn .='<a href="'.route('police-department-violences.edit',$policeDepartmentViolence).'" class="btn btn-icon btn-outline-danger btn-circle btn-xs mr-2" title="Update"> <i class="flaticon2-edit"></i> </a>';
-                    $actionBtn .= '<a onclick="activate_inactive(this); return false;" href="' . route('police-department-violences.destroy', $policeDepartmentViolence) . '" class="btn btn-icon btn-circle btn-xs mr-2 btn-outline-danger" title="' . ($policeDepartmentViolence->status? 'Deactivate' : 'Activate') . '"> <i class="' . ($policeDepartmentViolence->status ? 'icon-md fas fa-toggle-on' : 'icon-md fas fa-toggle-off') . '"></i> </a>';
+                    if (auth()->user()->isDepartment()) {
+                        $actionBtn .= '<a href="' . route('police-department-violences.edit', $policeDepartmentViolence) . '" class="btn btn-icon btn-outline-danger btn-circle btn-xs mr-2" title="Update"> <i class="flaticon2-edit"></i> </a>';
+                        $actionBtn .= '<a onclick="activate_inactive(this); return false;" href="' . route('police-department-violences.destroy', $policeDepartmentViolence) . '" class="btn btn-icon btn-circle btn-xs mr-2 btn-outline-danger" title="' . ($policeDepartmentViolence->status ? 'Deactivate' : 'Activate') . '"> <i class="' . ($policeDepartmentViolence->status ? 'icon-md fas fa-toggle-on' : 'icon-md fas fa-toggle-off') . '"></i> </a>';
+                    }
                     return $actionBtn;
                 })
                 ->rawColumns(['district_name_e','month_name','target_value','status', 'action'])

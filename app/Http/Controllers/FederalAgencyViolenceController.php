@@ -22,6 +22,9 @@ class FederalAgencyViolenceController extends Controller
 
         if(request()->ajax()) {
             $query = FederalAgencyViolence::with('department' ,'district', 'month');
+            if(auth()->user()->isDepartment()){
+                $query->where('department_id', auth()->user()->department_id);
+            }
             return DataTables::of($query)
                 ->addIndexColumn()
                 ->addColumn('department_name', function (FederalAgencyViolence $federalAgencyViolence) {
@@ -37,8 +40,11 @@ class FederalAgencyViolenceController extends Controller
                     return '<span class="label label-lg font-weight-bold label-inline '.($federalAgencyViolence->status?'label-light-success':'label-light-danger').'">'.($federalAgencyViolence->status?'Active':'Inactive').'</span>';
                 })
                 ->addColumn('action', function(FederalAgencyViolence $federalAgencyViolence){
-                    $actionBtn ='<a href="'.route('federal-agency-violences.edit',$federalAgencyViolence).'" class="btn btn-icon btn-outline-danger btn-circle btn-xs mr-2" title="Update"> <i class="flaticon2-edit"></i> </a>';
-                    $actionBtn .= '<a onclick="activate_inactive(this); return false;" href="' . route('federal-agency-violences.destroy', $federalAgencyViolence) . '" class="btn btn-icon btn-circle btn-xs mr-2 btn-outline-danger" title="' . ($federalAgencyViolence->status? 'Deactivate' : 'Activate') . '"> <i class="' . ($federalAgencyViolence->status ? 'icon-md fas fa-toggle-on' : 'icon-md fas fa-toggle-off') . '"></i> </a>';
+                    $actionBtn = '<a target="_blank" href="' . route('federal-agency-violences.show', $federalAgencyViolence) . '" class="btn btn-icon btn-circle btn-xs mr-2 btn-outline-danger" title="Detail"> <i class="icon-md fas fa-eye"></i> </a>';
+                    if (auth()->user()->isDepartment()) {
+                        $actionBtn .= '<a href="' . route('federal-agency-violences.edit', $federalAgencyViolence) . '" class="btn btn-icon btn-outline-danger btn-circle btn-xs mr-2" title="Update"> <i class="flaticon2-edit"></i> </a>';
+                        $actionBtn .= '<a onclick="activate_inactive(this); return false;" href="' . route('federal-agency-violences.destroy', $federalAgencyViolence) . '" class="btn btn-icon btn-circle btn-xs mr-2 btn-outline-danger" title="' . ($federalAgencyViolence->status ? 'Deactivate' : 'Activate') . '"> <i class="' . ($federalAgencyViolence->status ? 'icon-md fas fa-toggle-on' : 'icon-md fas fa-toggle-off') . '"></i> </a>';
+                    }
                     return $actionBtn;
                 })
                 ->rawColumns(['district_name_e','month_name','target_value','status', 'action'])

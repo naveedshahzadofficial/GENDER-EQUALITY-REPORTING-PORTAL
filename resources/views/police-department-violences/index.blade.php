@@ -18,11 +18,13 @@
                     <div class="card-title">
                         <h3 class="card-label">Police Department: Violence Against Children and Women</h3>
                     </div>
+                    @if(auth()->user()->isDepartment())
                         <div class="card-toolbar">
                         <!--begin::Button-->
                         <a href="{{ route('police-department-violences.create') }}" class="btn btn-primary bg-white btn-outline-white text-danger font-weight-bolder">New Violence</a>
                         <!--end::Button-->
                     </div>
+                    @endif
                 </div>
                 <div class="card-body">
                 @component('_components.alerts-default') @endcomponent
