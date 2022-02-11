@@ -16,7 +16,7 @@
             <div class="card card-custom">
                 <div class="card-header flex-wrap border-0 pb-0">
                     <div class="card-title">
-                        <h3 class="card-label">Police Department: Violence Against Children and Women</h3>
+                        <h3 class="card-label">Violence Against Children and Women</h3>
                     </div>
                     @if(auth()->user()->isDepartment())
                         <div class="card-toolbar">
