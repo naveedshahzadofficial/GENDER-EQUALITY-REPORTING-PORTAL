@@ -142,7 +142,7 @@
                                 </li>
                                 @endif
 
-                                @if((auth()->user()->isTable1() && auth()->user()->isFiaDepartment()) || auth()->user()->isAdmin())
+                                @if((auth()->user()->isTable1() && auth()->user()->isPoliceDepartment()) || auth()->user()->isAdmin())
                                 <li class="menu-item {{ areActiveRoutes(['police-department-violences.index','police-department-violences.create','police-department-violences.edit','police-department-violences.show']) }}" aria-haspopup="true">
                                     <a href="{{ route('police-department-violences.index') }}" class="menu-link">
 										<span class="svg-icon menu-icon">
