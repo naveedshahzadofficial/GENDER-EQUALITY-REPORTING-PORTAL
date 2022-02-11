@@ -77,11 +77,11 @@ class User extends Authenticatable
 
     function isTable1(): bool
     {
-        return in_array($this->department_id, []);
+        return in_array($this->department_id, [34,6,16]);
     }
     function isTable2(): bool
     {
-        return in_array($this->department_id, []);
+        return in_array($this->department_id, [40]);
     }
     function isTable3(): bool
     {
@@ -89,7 +89,7 @@ class User extends Authenticatable
     }
     function isTable4(): bool
     {
-        return ! in_array($this->department_id, []);
+        return ! in_array($this->department_id, [34]);
     }
 
 }
