@@ -72,7 +72,9 @@ class AnnualDevelopmentProjectController extends Controller
     public function create()
     {
         $departments = Department::where('status', 1)->get(['id', 'department_name']);
-        $projects = Project::where('status', 'Active')->get();
+        $projects = Project::where('status', 'Active')->when(auth()->user()->isDepartment(), function($query){
+            return $query->where('department_id', auth()->user()->department_id);
+        })->get();
         $project_types = ProjectType::where('status', 1)->get();
         $targets = Target::where('status', 'Active')->get();
         return view('annual-development-projects.create', compact('departments', 'projects', 'project_types', 'targets'));
@@ -137,7 +139,9 @@ class AnnualDevelopmentProjectController extends Controller
     {
         $annualDevelopmentProject->load('projectBudgets', 'projectProgressReport');
         $departments = Department::where('status', 1)->get(['id', 'department_name']);
-        $projects = Project::where('status', 'Active')->get();
+        $projects = Project::where('status', 'Active')->when(auth()->user()->isDepartment(), function($query){
+            return $query->where('department_id', auth()->user()->department_id);
+        })->get();
         $project_types = ProjectType::where('status', 'Active')->get();
         $targets = Target::where('status', 'Active')->get();
         return view('annual-development-projects.edit', compact('departments', 'projects', 'project_types', 'annualDevelopmentProject', 'targets'));

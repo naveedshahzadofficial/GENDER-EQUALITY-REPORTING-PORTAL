@@ -20,8 +20,14 @@ class ProjectController extends Controller
     {
         if(request()->ajax()) {
             $query=Project::with('projectType');
+            if(auth()->user()->isDepartment()){
+                $query->where('department_id', auth()->user()->department_id);
+            }
             return DataTables::of($query)
                 ->addIndexColumn()
+                ->addColumn('department_name', function (Project $project) {
+                    return optional($project->department)->department_name;
+                })
                 ->addColumn('project_type_title', function (Project $project) {
                     return optional($project->projectType)->project_type_title;
                 })
@@ -47,7 +53,8 @@ class ProjectController extends Controller
     public function create()
     {
         $project_types = ProjectType::where('status', 1)->get();
-        return view('projects.create', compact('project_types'));
+        $departments = Department::where('status', 1)->get();
+        return view('projects.create', compact('project_types', 'departments'));
     }
 
     /**
@@ -86,7 +93,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $project_types = ProjectType::where('status', 1)->get();
-        return view('projects.edit',compact('project', 'project_types'));
+        $departments = Department::where('status', 1)->get();
+        return view('projects.edit',compact('project', 'project_types', 'departments'));
 
     }
 

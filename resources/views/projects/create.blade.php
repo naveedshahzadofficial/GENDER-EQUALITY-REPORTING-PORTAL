@@ -25,6 +25,22 @@
                         <!--begin::Form-->
                         {!! Form::open(array('id'=>'form_add_edit','route' => 'projects.store','method'=>'POST','files' => 'true')) !!}
                         <div class="card-body">
+
+                            <div class="row form-group">
+                                <div class="col-lg-6 @if(!empty(auth()->user()->department_id)) d-none @endif">
+                                    <label>Department <span class="color-red-700">*</span></label>
+                                    <select class="form-control select2" name="department_id">
+                                        <option value="">Select Department</option>
+                                        @foreach($departments as $department)
+                                            <option {{ old('department_id',auth()->user()->department_id)== $department->id ? 'selected': '' }} value="{{ $department->id }}"> {{ $department->department_name }} </option>
+                                        @endforeach
+                                    </select>
+                                    @error('department_id')
+                                    <div class="error">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="row form-group">
                                 <div class="col-lg-6">
                                     <label>Project Type <span class="color-red-700">*</span></label>

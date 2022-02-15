@@ -92,8 +92,11 @@
                                             <span class="menu-text">Project Types</span>
                                         </a>
                                     </li>
-                                    <li class="menu-item {{ areActiveRoutes(['projects.index','projects.create','projects.edit']) }}" aria-haspopup="true">
-                                        <a href="{{ route('projects.index') }}" class="menu-link">
+
+                                @endif
+
+                                <li class="menu-item {{ areActiveRoutes(['projects.index','projects.create','projects.edit']) }}" aria-haspopup="true">
+                                    <a href="{{ route('projects.index') }}" class="menu-link">
 										<span class="svg-icon menu-icon">
 											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -103,10 +106,9 @@
 												</g>
 											</svg>
 										</span>
-                                            <span class="menu-text">Projects</span>
-                                        </a>
-                                    </li>
-                                @endif
+                                        <span class="menu-text">Projects</span>
+                                    </a>
+                                </li>
 
                                 @if(auth()->user()->isTable3() || auth()->user()->isAdmin())
                                 <li class="menu-item {{ areActiveRoutes(['voluntary-national-report.index','voluntary-national-report.create','voluntary-national-report.edit','voluntary-national-report.show']) }}" aria-haspopup="true">

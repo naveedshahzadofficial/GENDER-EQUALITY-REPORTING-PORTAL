@@ -34,6 +34,9 @@
                         <thead>
                         <tr>
                             <th>No</th>
+                            @if(!auth()->user()->isDepartment())
+                                <th>Department</th>
+                            @endif
                             <th>Project Type</th>
                             <th>Title</th>
                             <th>Start Date</th>
@@ -83,6 +86,9 @@
                 },
                 columns: [
                     {data: 'id', searchable: false, visible: false, printable: false},
+                        @if(!auth()->user()->isDepartment())
+                    {data: 'department_name', name: 'department.department_name'},
+                        @endif
                     {data: 'project_type_title', name: 'projectType.project_type_title'},
                     {data: 'project_title', name: 'project_title'},
                     {data: 'project_start_date', name: 'project_start_date', class: 'text-center'},

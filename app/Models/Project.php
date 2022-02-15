@@ -16,12 +16,18 @@ class Project extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'department_id',
         'project_type_id',
         'project_title',
         'project_start_date',
         'project_end_date',
         'status'
     ];
+
+    public function department(): BelongsTo
+    {
+        return $this->belongsTo(Department::class);
+    }
 
     public function projectType(): BelongsTo
     {

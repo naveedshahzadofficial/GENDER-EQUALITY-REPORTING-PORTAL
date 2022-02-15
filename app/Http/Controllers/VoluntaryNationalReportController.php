@@ -68,7 +68,9 @@ class VoluntaryNationalReportController extends Controller
     {
         $departments = Department::where('status', 1)->get(['id', 'department_name']);
         $targets = Target::where('status', 'Active')->get(['id', 'target_value']);
-        $projects = Project::where('status', 'Active')->get();
+        $projects = Project::where('status', 'Active')->when(auth()->user()->isDepartment(), function($query){
+            return $query->where('department_id', auth()->user()->department_id);
+        })->get();
         return view('voluntary-national-report.create', compact('departments','targets', 'projects'));
     }
 
@@ -114,7 +116,9 @@ class VoluntaryNationalReportController extends Controller
     {
         $departments = Department::where('status', 1)->get(['id', 'department_name']);
         $targets = Target::where('status', 'Active')->get(['id', 'target_value']);
-        $projects = Project::where('status', 'Active')->get();
+        $projects = Project::where('status', 'Active')->when(auth()->user()->isDepartment(), function($query){
+            return $query->where('department_id', auth()->user()->department_id);
+        })->get();
         return view('voluntary-national-report.edit',compact('departments','targets','voluntaryNationalReport', 'projects'));
     }
 

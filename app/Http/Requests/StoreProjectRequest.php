@@ -25,8 +25,9 @@ class StoreProjectRequest extends FormRequest
     public function rules()
     {
         return [
+            'department_id'=>'required',
             'project_type_id'=>'required',
-            'project_title'=>['required','string', Rule::unique('projects', 'project_title')->where('project_type_id', $this->project_type_id)],
+            'project_title'=>['required','string', Rule::unique('projects', 'project_title')->where('project_type_id', $this->project_type_id)->where('department_id', $this->department_id)],
             'project_start_date'=>'required|date',
             'project_end_date'=>'required|date',
         ];
