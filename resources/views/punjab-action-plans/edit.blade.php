@@ -95,7 +95,7 @@
                                     <label>File Attachment (Indicator Framework)<span class="color-red-700">*</span>@if(!empty($punjabActionPlan->indicator_framework_file))&nbsp;<a href="{{ \Illuminate\Support\Facades\Storage::url($punjabActionPlan->indicator_framework_file) }}" target="_blank">View File</a> @endif</label>
                                     <input type="hidden" name="old_indicator_framework_file" class="form-control" value="{{ $punjabActionPlan->indicator_framework_file }}" />
                                     <input type="file" name="indicator_framework_file" class="form-control" value="{{ old('indicator_framework_file', $punjabActionPlan->indicator_framework_file) }}" />
-                                    <small>Upload formats are jpeg,jpg,png,pdf and upload file size must be less than 2 MB</small>
+                                    <small>Upload formats are jpeg, jpg, png, pdf and upload file size must be less than 2 MB</small>
                                     @error('indicator_framework_file')
                                     <div class="error">{{ $message }}</div>
                                     @enderror

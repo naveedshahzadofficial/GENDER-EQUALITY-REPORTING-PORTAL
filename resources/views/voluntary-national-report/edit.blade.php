@@ -129,7 +129,7 @@
                                     <label>Attachment<span class="color-red-700">*</span>@if(!empty($voluntaryNationalReport->attachment))&nbsp;<a href="{{ Storage::url($voluntaryNationalReport->attachment) }}" target="_blank">View File</a> @endif</label>
                                     <input type="file" name="attachment" class="form-control"  />
                                     <input type="hidden" name="old_attachment" class="form-control" value="{{ $voluntaryNationalReport->attachment }}" />
-                                    <small>Upload formats are jpeg,jpg,png,pdf and upload file size must be less than 2 MB</small>
+                                    <small>Upload formats are jpeg, jpg, png, pdf and upload file size must be less than 2 MB</small>
                                     @error('attachment')
                                     <div class="error">{{ $message }}</div>
                                     @enderror

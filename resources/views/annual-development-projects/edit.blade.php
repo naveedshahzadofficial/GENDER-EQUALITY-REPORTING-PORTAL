@@ -94,7 +94,7 @@
                             <label>Project Document Attachment<span class="color-red-700">*</span>@if(!empty($annualDevelopmentProject->project_document_file))&nbsp;<a href="{{ \Illuminate\Support\Facades\Storage::url($annualDevelopmentProject->project_document_file) }}" target="_blank">View File</a> @endif</label>
                             <input type="file" name="project_document_file" class="form-control" value="" />
                             <input type="hidden" name="old_project_document_file" class="form-control" value="{{ $annualDevelopmentProject->project_document_file }}" />
-                            <small>Upload formats are jpeg,jpg,png,pdf and upload file size must be less than 2 MB</small>
+                            <small>Upload formats are jpeg, jpg, png, pdf and upload file size must be less than 2 MB</small>
                             @error('project_document_file')
                             <div class="error">{{ $message }}</div>
                             @enderror
@@ -113,7 +113,7 @@
 
                         <div class="col-lg-6">
                             <label>Project Start Date<span class="color-red-700">*</span></label>
-                            <input readonly type="text" id="project_start_date" name="project_start_date" style="width: 100% !important;" class="form-control" placeholder="Start Date" value="{{ old('project_start_date', $annualDevelopmentProject->project_start_date) }}" />
+                            <input readonly type="text" id="project_start_date" name="project_start_date" style="width: 100% !important;" class="form-control datepicker" placeholder="Start Date" value="{{ old('project_start_date', $annualDevelopmentProject->project_start_date) }}" />
                             @error('project_start_date')
                             <div class="error">{{ $message }}</div>
                             @enderror
@@ -121,7 +121,7 @@
 
                         <div class="col-lg-6">
                             <label>Project End Date<span class="color-red-700">*</span></label>
-                            <input readonly type="text" id="project_end_date" name="project_end_date" style="width: 100% !important;" class="form-control" placeholder="End Date" value="{{ old('project_end_date', $annualDevelopmentProject->project_end_date) }}" />
+                            <input readonly type="text" id="project_end_date" name="project_end_date" style="width: 100% !important;" class="form-control datepicker" placeholder="End Date" value="{{ old('project_end_date', $annualDevelopmentProject->project_end_date) }}" />
                             @error('project_end_date')
                             <div class="error">{{ $message }}</div>
                             @enderror
@@ -211,7 +211,7 @@
                                     <label>Progress Report<span class="color-red-700">*</span>@if(!empty($progress_report->progress_report_file))&nbsp;<a class="view-file" href="{{ \Illuminate\Support\Facades\Storage::url($progress_report->progress_report_file) }}" target="_blank">View File</a> @endif</label>
                                     <input type="file" name="progress_report_file" class="form-control progress_report" value=""  />
                                     <input type="hidden" name="old_progress_report_file" class="old_progress_report_file form-control" value="{{ $progress_report->progress_report_file }}"  />
-                                    <small>Upload formats are jpeg,jpg,png,pdf and upload file size must be less than 2 MB</small>
+                                    <small>Upload formats are jpeg, jpg, png, pdf and upload file size must be less than 2 MB</small>
                                     @error("progress_reports.{$index}.progress_report_file")
                                     <div class="error">{{ $message }}</div>
                                     @enderror

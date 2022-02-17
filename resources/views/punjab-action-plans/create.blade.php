@@ -94,7 +94,7 @@
                                 <div class="col-lg-6">
                                     <label>File Attachment (Indicator Framework)<span class="color-red-700">*</span></label>
                                     <input type="file" name="indicator_framework_file" class="form-control" value="{{ old('indicator_framework_file') }}" />
-                                    <small>Upload formats are jpeg,jpg,png,pdf and upload file size must be less than 2 MB</small>
+                                    <small>Upload formats are jpeg, jpg, png, pdf and upload file size must be less than 2 MB</small>
                                     @error('indicator_framework_file')
                                     <div class="error">{{ $message }}</div>
                                     @enderror
