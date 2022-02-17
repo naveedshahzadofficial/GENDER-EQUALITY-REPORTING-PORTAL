@@ -94,7 +94,7 @@
                                     </li>
 
                                 @endif
-
+                                @if(!auth()->user()->isFiaDepartment())
                                 <li class="menu-item {{ areActiveRoutes(['projects.index','projects.create','projects.edit']) }}" aria-haspopup="true">
                                     <a href="{{ route('projects.index') }}" class="menu-link">
 										<span class="svg-icon menu-icon">
@@ -109,7 +109,7 @@
                                         <span class="menu-text">Projects</span>
                                     </a>
                                 </li>
-
+                                @endif
                                 @if(auth()->user()->isTable3() || auth()->user()->isAdmin())
                                 <li class="menu-item {{ areActiveRoutes(['voluntary-national-report.index','voluntary-national-report.create','voluntary-national-report.edit','voluntary-national-report.show']) }}" aria-haspopup="true">
                                     <a href="{{ route('voluntary-national-report.index') }}" class="menu-link">
