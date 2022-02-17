@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
@@ -53,6 +54,7 @@ class ProjectController extends Controller
     public function create()
     {
         $project_types = ProjectType::where('status', 1)->get();
+//        $departments = Department::where('status', 1)->get();
         $departments = Department::where('status', 1)->get();
         return view('projects.create', compact('project_types', 'departments'));
     }
