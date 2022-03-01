@@ -151,7 +151,6 @@
                         format:'Y-m-d',
                         formatDate:'Y-m-d',
                         scrollInput : false,
-                        maxDate: new Date
                     });
                 });
        </script>
