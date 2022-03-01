@@ -195,7 +195,7 @@
                                 </li>
                                 @endif
 
-                                @if((auth()->user()->isTable2() && auth()->user()->isFiaDepartment()) || auth()->user()->isAdmin())
+                                @if((auth()->user()->isTable2() || auth()->user()->isFiaDepartment()) || auth()->user()->isAdmin())
                                 <li class="menu-item {{ areActiveRoutes(['punjab-action-plans.index','punjab-action-plans.create','punjab-action-plans.edit','punjab-action-plans.show']) }}" aria-haspopup="true">
                                     <a href="{{ route('punjab-action-plans.index') }}" class="menu-link">
 										<span class="svg-icon menu-icon">
