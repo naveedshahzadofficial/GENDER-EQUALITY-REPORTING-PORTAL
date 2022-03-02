@@ -40,7 +40,7 @@ class WomenOmbudspersonViolenceController extends Controller
                 })
                 ->addColumn('action', function(WomenOmbudspersonViolence $womenOmbudspersonViolence){
                     $actionBtn = '<a target="_blank" href="' . route('women-ombudsperson-violences.show', $womenOmbudspersonViolence) . '" class="btn btn-icon btn-circle btn-xs mr-2 btn-outline-danger" title="Detail"> <i class="icon-md fas fa-eye"></i> </a>';
-                    if (auth()->user()->isDepartment()) {
+                    if (auth()->user()->isDepartment() && !auth()->user()->isPAPDepartment()) {
                         $actionBtn .= '<a href="' . route('women-ombudsperson-violences.edit', $womenOmbudspersonViolence) . '" class="btn btn-icon btn-outline-danger btn-circle btn-xs mr-2" title="Update"> <i class="flaticon2-edit"></i> </a>';
                         $actionBtn .= '<a onclick="activate_inactive(this); return false;" href="' . route('women-ombudsperson-violences.destroy', $womenOmbudspersonViolence) . '" class="btn btn-icon btn-circle btn-xs mr-2 btn-outline-danger" title="' . ($womenOmbudspersonViolence->status ? 'Deactivate' : 'Activate') . '"> <i class="' . ($womenOmbudspersonViolence->status ? 'icon-md fas fa-toggle-on' : 'icon-md fas fa-toggle-off') . '"></i> </a>';
                     }

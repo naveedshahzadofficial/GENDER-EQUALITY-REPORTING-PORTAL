@@ -41,7 +41,7 @@ class FederalAgencyViolenceController extends Controller
                 })
                 ->addColumn('action', function(FederalAgencyViolence $federalAgencyViolence){
                     $actionBtn = '<a target="_blank" href="' . route('federal-agency-violences.show', $federalAgencyViolence) . '" class="btn btn-icon btn-circle btn-xs mr-2 btn-outline-danger" title="Detail"> <i class="icon-md fas fa-eye"></i> </a>';
-                    if (auth()->user()->isDepartment()) {
+                    if (auth()->user()->isDepartment() && !auth()->user()->isPAPDepartment()) {
                         $actionBtn .= '<a href="' . route('federal-agency-violences.edit', $federalAgencyViolence) . '" class="btn btn-icon btn-outline-danger btn-circle btn-xs mr-2" title="Update"> <i class="flaticon2-edit"></i> </a>';
                         $actionBtn .= '<a onclick="activate_inactive(this); return false;" href="' . route('federal-agency-violences.destroy', $federalAgencyViolence) . '" class="btn btn-icon btn-circle btn-xs mr-2 btn-outline-danger" title="' . ($federalAgencyViolence->status ? 'Deactivate' : 'Activate') . '"> <i class="' . ($federalAgencyViolence->status ? 'icon-md fas fa-toggle-on' : 'icon-md fas fa-toggle-off') . '"></i> </a>';
                     }

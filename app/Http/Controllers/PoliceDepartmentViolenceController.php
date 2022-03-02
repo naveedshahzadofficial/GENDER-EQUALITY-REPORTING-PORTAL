@@ -40,7 +40,7 @@ class PoliceDepartmentViolenceController extends Controller
                 })
                 ->addColumn('action', function(PoliceDepartmentViolence $policeDepartmentViolence){
                     $actionBtn = '<a target="_blank" href="' . route('police-department-violences.show', $policeDepartmentViolence) . '" class="btn btn-icon btn-circle btn-xs mr-2 btn-outline-danger" title="Detail"> <i class="icon-md fas fa-eye"></i> </a>';
-                    if (auth()->user()->isDepartment()) {
+                    if (auth()->user()->isDepartment() && !auth()->user()->isPAPDepartment()) {
                         $actionBtn .= '<a href="' . route('police-department-violences.edit', $policeDepartmentViolence) . '" class="btn btn-icon btn-outline-danger btn-circle btn-xs mr-2" title="Update"> <i class="flaticon2-edit"></i> </a>';
                         $actionBtn .= '<a onclick="activate_inactive(this); return false;" href="' . route('police-department-violences.destroy', $policeDepartmentViolence) . '" class="btn btn-icon btn-circle btn-xs mr-2 btn-outline-danger" title="' . ($policeDepartmentViolence->status ? 'Deactivate' : 'Activate') . '"> <i class="' . ($policeDepartmentViolence->status ? 'icon-md fas fa-toggle-on' : 'icon-md fas fa-toggle-off') . '"></i> </a>';
                     }

@@ -18,7 +18,7 @@
                     <div class="card-title">
                         <h3 class="card-label">Violence Against Women</h3>
                     </div>
-                    @if(auth()->user()->isDepartment())
+                    @if(auth()->user()->isDepartment() && !auth()->user()->isPAPDepartment())
                         <div class="card-toolbar">
                         <!--begin::Button-->
                         <a href="{{ route('federal-agency-violences.create') }}" class="btn btn-primary bg-white btn-outline-white text-danger font-weight-bolder">New Violence</a>
@@ -34,7 +34,7 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            @if(!auth()->user()->isDepartment())
+                            @if(!auth()->user()->isDepartment() || auth()->user()->isPAPDepartment())
                                 <th>Department</th>
                             @endif
                             <th>District</th>
@@ -87,7 +87,7 @@
                 },
                 columns: [
                     {data: 'id', searchable: false, visible: false, printable: false},
-                        @if(!auth()->user()->isDepartment())
+                        @if(!auth()->user()->isDepartment() || auth()->user()->isPAPDepartment())
                     {data: 'department_name', name: 'department.department_name'},
                         @endif
                     {data: 'district_name_e', name: 'district.district_name_e'},

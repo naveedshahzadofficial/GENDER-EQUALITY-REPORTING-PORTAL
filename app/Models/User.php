@@ -107,4 +107,9 @@ class User extends Authenticatable
         return $this->department_id == 6;
     }
 
+    function isPAPDepartment(): bool
+    {
+        return $this->department_id == 40;
+    }
+
 }
