@@ -21,7 +21,7 @@ class WomenOmbudspersonViolenceController extends Controller
     {
         if(request()->ajax()) {
             $query = WomenOmbudspersonViolence::with('department' ,'district', 'month');
-            if(auth()->user()->isDepartment()){
+            if(auth()->user()->isDepartment() && !auth()->user()->isPAPDepartment()){
                 $query->where('department_id', auth()->user()->department_id);
             }
             return DataTables::of($query)
