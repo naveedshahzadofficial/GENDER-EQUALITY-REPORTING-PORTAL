@@ -174,7 +174,7 @@
 												</g>
 											</svg>
 										</span>
-                                        <span class="menu-text">{{ auth()->user()->isAdmin() || auth()->user()->isPAPDepartment()?'Punjab: Violence Against Children and Women':'Violence Against Children and Women' }}</span>
+                                        <span class="menu-text">{{ auth()->user()->isAdmin() || auth()->user()->isPAPDepartment()?'Punjab Police: Violence Against Children and Women':'Violence Against Children and Women' }}</span>
                                     </a>
                                 </li>
                                 @endif
@@ -191,7 +191,7 @@
 												</g>
 											</svg>
 										</span>
-                                        <span class="menu-text">{{ auth()->user()->isAdmin() || auth()->user()->isPAPDepartment()?'Federal: Violence Against Women':'Violence Against Women' }}</span>
+                                        <span class="menu-text">{{ auth()->user()->isAdmin() || auth()->user()->isPAPDepartment()?'FIA: Violence Against Women':'Violence Against Women' }}</span>
                                     </a>
                                 </li>
                                 @endif
