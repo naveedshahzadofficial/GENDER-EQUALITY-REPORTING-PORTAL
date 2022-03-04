@@ -101,7 +101,7 @@
                         </div>
 
                         <div class="col-lg-6">
-                            <label>Total Approved Budget (Million)<span class="color-red-700">*</span></label>
+                            <label>Total Approved Budget<span class="color-red-700">*</span></label>
                             <input type="text" name="total_approved_budget" style="width: 100% !important;" class="form-control money_format" placeholder="Approved Budget (Rs in Million)" value="{{ old('total_approved_budget' ,intval($annualDevelopmentProject->total_approved_budget)) }}" />
                             @error('total_approved_budget')
                             <div class="error">{{ $message }}</div>

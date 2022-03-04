@@ -39,7 +39,7 @@
                             @endif
                             <th>Project</th>
                             <th>Project Type</th>
-                            <th>Total Approved Budget (Million)</th>
+                            <th>Total Approved Budget</th>
                             <th>Total Expenditure</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Action</th>

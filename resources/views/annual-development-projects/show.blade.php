@@ -71,7 +71,7 @@
 
                                 <div class="col-md-6">
                                     <div class="static-info row">
-                                        <div class="col-md-6 name"><strong>Total Approved Budget (Million):</strong></div>
+                                        <div class="col-md-6 name"><strong>Total Approved Budget:</strong></div>
                                         <div class="col-md-6 value">{{ $annualDevelopmentProject->total_approved_budget }}</div>
                                     </div>
                                 </div>
