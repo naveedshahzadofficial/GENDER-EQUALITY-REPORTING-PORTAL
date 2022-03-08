@@ -1,7 +1,7 @@
 <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
 			<!--begin::Logo-->
 			<a href="{{ route('home') }}">
-				<img alt="Logo" src="{{ asset('assets/media/logos/logo.png')  }} " width="120px" />
+                <span class="dashboard-logo-heading-main">&nbsp;&nbsp;&nbsp;SDG 5</span>
 			</a>
 			<!--end::Logo-->
 			<!--begin::Toolbar-->
