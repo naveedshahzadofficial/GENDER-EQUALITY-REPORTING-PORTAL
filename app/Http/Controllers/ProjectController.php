@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\ProjectType;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 
@@ -133,5 +134,10 @@ class ProjectController extends Controller
         return redirect()
             ->route('projects.index')
             ->with('success_message', 'Project status has been changed successfully.');
+    }
+
+    public function getProject(Request $request){
+        $project = Project::findorFail($request->project_id);
+        return response()->json($project);
     }
 }

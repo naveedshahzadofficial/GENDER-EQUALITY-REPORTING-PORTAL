@@ -153,6 +153,30 @@
                         scrollInput : false,
                     });
                 });
+
+                $(function(){
+                    $('#start_datepicker').datetimepicker({
+                        format:'Y-m-d',
+                        onShow:function( ct ){
+                            this.setOptions({
+                                maxDate:$('#end_datepicker').val()?$('#end_datepicker').val():false
+                            })
+                        },
+                        scrollInput : false,
+                        timepicker:false
+                    });
+                    $('#end_datepicker').datetimepicker({
+                        format:'Y-m-d',
+                        onShow:function( ct ){
+                            this.setOptions({
+                                minDate:$('#start_datepicker').val()?$('#start_datepicker').val():false
+                            })
+                        },
+                        scrollInput : false,
+                        timepicker:false
+                    });
+                });
+
        </script>
 
 		@show

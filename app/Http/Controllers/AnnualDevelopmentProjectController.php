@@ -214,6 +214,7 @@ class AnnualDevelopmentProjectController extends Controller
         $data = new \stdClass;
         if($project) {
             $data->status = true;
+            $data->project_type_id = $project->project_type_id;
             $data->project_start_date = Carbon::parse($project->project_start_date)->format('d-m-Y');
             $data->project_end_date = Carbon::parse($project->project_end_date)->format('d-m-Y');
 

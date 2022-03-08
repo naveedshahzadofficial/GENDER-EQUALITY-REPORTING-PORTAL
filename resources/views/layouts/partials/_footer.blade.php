@@ -3,8 +3,8 @@
 						<div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
 							<!--begin::Nav-->
 							<div class="nav nav-dark">
-                                <span class="text-muted font-weight-bold mr-2">{{ date('Y') }}©</span>
-                                <a href="https://dgpr.punjab.gov.pk/" target="_blank" class="text-dark-75 text-hover-primary">Directorate General Public Relations Punjab</a>
+                               {{-- <span class="text-muted font-weight-bold mr-2">{{ date('Y') }}©</span>
+                                <a href="https://dgpr.punjab.gov.pk/" target="_blank" class="text-dark-75 text-hover-primary">Directorate General Public Relations Punjab</a>--}}
 							</div>
 							<!--end::Nav-->
                             <!--begin::Copyright-->

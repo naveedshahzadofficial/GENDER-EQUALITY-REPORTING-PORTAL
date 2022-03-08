@@ -38,6 +38,7 @@ Route::group(['middleware'=>['auth'] ] ,function() {
     Route::post('update_password', [UsersController::class, 'passwordUpdate'])->name('new_password.update');
     Route::resource('users', UsersController::class);
     Route::resource('targets', TargetController::class);
+    Route::post('projects/project-ajax', [ProjectController::class, 'getProject'])->name('projects.project-ajax');
     Route::resource('projects', ProjectController::class);
     Route::resource('project-types', ProjectTypeController::class);
     Route::resource('voluntary-national-report', VoluntaryNationalReportController::class);

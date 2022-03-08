@@ -57,7 +57,7 @@
 
                                 <div class="col-lg-6">
                                     <label>Policies / Program / Project / Interventions <span class="color-red-700">*</span></label>
-                                    <select class="form-control select2" name="project_id">
+                                    <select class="form-control select2" name="project_id" onchange="getProject(this)">
                                         <option value="">Select Project</option>
                                         @foreach($projects as $project)
                                             <option {{ old('project_id')== $project->id ? 'selected': '' }} value="{{ $project->id }}"> {{ $project->project_title }} </option>
@@ -72,11 +72,21 @@
 
                                 <div class="col-lg-6">
                                     <label>Start Date<span class="color-red-700">*</span></label>
-                                    <input type="text" name="start_date" style="width: 100% !important;" class="form-control datepicker" placeholder="Start Date" value="{{ old('start_date') }}" />
+                                    <input id="start_datepicker" readonly type="text" name="start_date" style="width: 100% !important;" class="form-control" placeholder="Start Date" value="{{ old('start_date') }}" />
                                     @error('start_date')
                                     <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                <div class="col-lg-6">
+                                    <label>End Date<span class="color-red-700">*</span></label>
+                                    <input id="end_datepicker" readonly type="text" name="end_date" style="width: 100% !important;" class="form-control" placeholder="End Date" value="{{ old('end_date') }}" />
+                                    @error('end_date')
+                                    <div class="error">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
                                 <div class="col-lg-6">
                                     <label>Achievement So Far <span class="color-red-700">*</span></label>
                                     <textarea class="form-control" name="achievements" id="achievements" >{{ old('achievements')?old('achievements'):'' }}</textarea>
@@ -84,8 +94,7 @@
                                     <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
-                            </div>
-                            <div class="form-group row">
+
                                 <div class="col-lg-6">
                                     <label>Challenges <span class="color-red-700">*</span></label>
                                     <textarea class="form-control" name="challenges" id="challenges" >{{ old('challenges')?old('challenges'):'' }}</textarea>
@@ -93,6 +102,8 @@
                                     <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
+                            </div>
+                            <div class="form-group row">
                                 <div class="col-lg-6">
                                     <label>Action Taken <span class="color-red-700">*</span></label>
                                     <textarea class="form-control" name="action_taken" id="action_taken" >{{ old('action_taken')?old('action_taken'):'' }}</textarea>
@@ -100,8 +111,7 @@
                                     <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
-                            </div>
-                            <div class="form-group row">
+
                                 <div class="col-lg-6">
                                     <label>Way Forward <span class="color-red-700">*</span></label>
                                     <textarea class="form-control" name="way_forward" id="way_forward" >{{ old('way_forward')?old('way_forward'):'' }}</textarea>
@@ -109,6 +119,10 @@
                                     <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
+
+                            </div>
+                            <div class="form-group row">
+
                                 <div class="col-lg-6">
                                     <label>Partnership <span class="color-red-700">*</span></label>
                                     <textarea class="form-control" name="partnership" id="partnership" >{{ old('partnership')?old('partnership'):'' }}</textarea>
@@ -116,15 +130,7 @@
                                     <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-lg-6">
-                                    <label>End Date<span class="color-red-700">*</span></label>
-                                    <input type="text" name="end_date" style="width: 100% !important;" class="form-control datepicker" placeholder="End Date" value="{{ old('end_date') }}" />
-                                    @error('end_date')
-                                    <div class="error">{{ $message }}</div>
-                                    @enderror
-                                </div>
+
                                 <div class="col-lg-6">
                                     <label>Upload Attachment<span class="color-red-700">*</span></label>
                                     <input type="file" name="attachment" class="form-control" value="{{ old('attachment') }}" />
@@ -261,6 +267,19 @@
             );
 
         });
+
+        function getProject(obj){
+            let project_id = $(obj).val();
+            if(project_id) {
+                $.post('{{ route('projects.project-ajax') }}', {'project_id': project_id}, function (response) {
+                    $('#start_datepicker').val(response.project_start_date);
+                    $('#end_datepicker').val(response.project_end_date);
+                });
+            }else{
+                $('#start_datepicker').val('');
+                $('#end_datepicker').val('');
+            }
+        }
     </script>
 
 @endpush

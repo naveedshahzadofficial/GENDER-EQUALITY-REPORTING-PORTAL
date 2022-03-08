@@ -58,7 +58,7 @@
 
                         <div class="col-lg-6">
                             <label>Project Type <span class="color-red-700">*</span></label>
-                            <select class="form-control select2" name="project_type_id">
+                            <select readonly class="form-control" name="project_type_id" id="project_type_id">
                                 <option value="">Select Project</option>
                                 @foreach($project_types as $project_type)
                                     <option {{ old('project_type_id', $annualDevelopmentProject->project_type_id)== $project_type->id ? 'selected': '' }} value="{{ $project_type->id }}"> {{ $project_type->project_type_title }} </option>
@@ -113,7 +113,7 @@
 
                         <div class="col-lg-6">
                             <label>Project Start Date<span class="color-red-700">*</span></label>
-                            <input readonly type="text" id="project_start_date" name="project_start_date" style="width: 100% !important;" class="form-control datepicker" placeholder="Start Date" value="{{ old('project_start_date', $annualDevelopmentProject->project_start_date) }}" />
+                            <input readonly type="text" id="start_datepicker" name="project_start_date" style="width: 100% !important;" class="form-control" placeholder="Start Date" value="{{ old('project_start_date', \Carbon\Carbon::parse($annualDevelopmentProject->project_start_date)->format('Y-m-d')) }}" />
                             @error('project_start_date')
                             <div class="error">{{ $message }}</div>
                             @enderror
@@ -121,7 +121,7 @@
 
                         <div class="col-lg-6">
                             <label>Project End Date<span class="color-red-700">*</span></label>
-                            <input readonly type="text" id="project_end_date" name="project_end_date" style="width: 100% !important;" class="form-control datepicker" placeholder="End Date" value="{{ old('project_end_date', $annualDevelopmentProject->project_end_date) }}" />
+                            <input readonly type="text" id="end_datepicker" name="project_end_date" style="width: 100% !important;" class="form-control" placeholder="End Date" value="{{ old('project_end_date', \Carbon\Carbon::parse($annualDevelopmentProject->project_end_date)->format('Y-m-d')) }}" />
                             @error('project_end_date')
                             <div class="error">{{ $message }}</div>
                             @enderror
@@ -299,6 +299,15 @@
     </div>
     <!--end::Entry-->
 @endsection
+
+@push('post-styles')
+    <style>
+        select[readonly]#project_type_id {
+            pointer-events: none;
+            touch-action: none;
+        }
+    </style>
+@endpush
 
 @push('post-scripts')
     <script id="budget-table" type="x-tmpl-mustache">
@@ -530,8 +539,9 @@
             let project_id = $(obj).val();
             $.post('{{ route('annual-development-projects.find-project') }}', {'project_id': project_id}, function (response){
                 if(response.status){
-                    $('#project_start_date').val(response.project_start_date)
-                    $('#project_end_date').val(response.project_end_date)
+                    $('#start_datepicker').val(response.project_start_date)
+                    $('#end_datepicker').val(response.project_end_date)
+                    $('#project_type_id').val(response.project_type_id)
                     let template = document.getElementById('budget-table').innerHTML;
                     let rendered = Mustache.render(template, response);
                     document.getElementById('budget-table-data').innerHTML = rendered;
@@ -568,8 +578,8 @@
                     });
 
                 }else{
-                    $('#project_start_date').val("")
-                    $('#project_end_date').val("")
+                    $('#start_datepicker').val("")
+                    $('#end_datepicker').val("")
                     let template = document.getElementById('budget-table').innerHTML;
                     let rendered = Mustache.render(template, response);
                     document.getElementById('budget-table-data').innerHTML = rendered;

@@ -66,7 +66,7 @@
                             <div class="row form-group">
                                 <div class="col-lg-6">
                                     <label>Start Date<span class="color-red-700">*</span></label>
-                                    <input readonly type="text" name="project_start_date" style="width: 100% !important;" class="form-control datepicker" placeholder="Start Date" value="{{ old('project_start_date',$project->project_start_date) }}" />
+                                    <input id="start_datepicker" readonly type="text" name="project_start_date" style="width: 100% !important;" class="form-control" placeholder="Start Date" value="{{ old('project_start_date',$project->project_start_date) }}" />
                                     @error('project_start_date')
                                     <div class="error">{{ $message }}</div>
                                     @enderror
@@ -74,7 +74,7 @@
 
                                 <div class="col-lg-6">
                                     <label>End Date<span class="color-red-700">*</span></label>
-                                    <input readonly type="text" name="project_end_date" style="width: 100% !important;" class="form-control datepicker" placeholder="End Date" value="{{ old('project_end_date',$project->project_end_date) }}" />
+                                    <input id="end_datepicker" readonly type="text" name="project_end_date" style="width: 100% !important;" class="form-control" placeholder="End Date" value="{{ old('project_end_date',$project->project_end_date) }}" />
                                     @error('project_end_date')
                                     <div class="error">{{ $message }}</div>
                                     @enderror
