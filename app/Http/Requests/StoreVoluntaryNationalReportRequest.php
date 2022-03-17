@@ -27,6 +27,7 @@ class StoreVoluntaryNationalReportRequest extends FormRequest
             'department_id'=>'required',
             'target_id'=>'required',
             'project_id'=>'required',
+            'project_type_id'=>'required',
             'start_date'=>'required|date',
             'achievements'=>'required|string',
             'challenges'=>'required|string',

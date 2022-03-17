@@ -31,7 +31,7 @@
                     <table class="table  data-table table-separate table-head-custom table-checkable" id="my_datatable">
                         <thead>
                         <tr>
-                            <th>No</th>
+                            <th>Order No</th>
                             <th>Icon</th>
                             <th>Target Value</th>
                             <th>Indicators</th>
@@ -80,7 +80,7 @@
                     }
                 },
                 columns: [
-                    {data: 'id', searchable: false, visible: false, printable: false},
+                    {data: 'order_no', searchable: false, visible: false, printable: false},
                     {data: 'icon_name', name: 'icon_name'},
                     {data: 'target_value', name: 'target_value'},
                     {data: 'indicator_titles', name: 'indicators.indicator_title'},
@@ -88,7 +88,7 @@
                     {data: 'status', name: 'status', class: 'text-center'},
                     {data: 'action', name: 'action', orderable: false, searchable: false, class: 'text-center not-exported'},
                 ],
-                order: [[0, 'desc']],
+                order: [[0, 'asc']],
                 dom: 'Blfrtip',
 
                 lengthMenu: [

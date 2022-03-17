@@ -62,7 +62,7 @@ class PunjabActionPlanController extends Controller
     public function create()
     {
         $departments = Department::where('status', 1)->get();
-        $targets = Target::where('status', 'Active')->get();
+        $targets = Target::where('status', 'Active')->orderBy('order_no')->get();
         $indicators = Indicator::where('status', 1)->get();
         $progress_status = ['Not Started', 'In Progress', 'Completed'];
         return view('punjab-action-plans.create', compact('departments','targets', 'indicators', 'progress_status'));
@@ -113,7 +113,7 @@ class PunjabActionPlanController extends Controller
     {
         $punjabActionPlan->load('targetReforms');
         $departments = Department::where('status', 1)->get();
-        $targets = Target::where('status', 'Active')->get();
+        $targets = Target::where('status', 'Active')->orderBy('order_no')->get();
         $indicators = Indicator::where('status', 1)->get();
         $progress_status = ['Not Started', 'In Progress', 'Completed'];
         return view('punjab-action-plans.edit', compact('punjabActionPlan', 'departments', 'targets', 'indicators', 'progress_status'));

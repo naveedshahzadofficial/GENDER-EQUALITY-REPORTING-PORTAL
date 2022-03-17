@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Department;
 use App\Models\Project;
+use App\Models\ProjectType;
 use App\Models\Target;
 use App\Models\VoluntaryNationalReport;
 use App\Http\Requests\StoreVoluntaryNationalReportRequest;
@@ -39,6 +40,9 @@ class VoluntaryNationalReportController extends Controller
                 ->addColumn('project_title', function (VoluntaryNationalReport $voluntaryNationalReport) {
                     return optional($voluntaryNationalReport->project)->project_title;
                 })
+                ->addColumn('project_type_title', function (VoluntaryNationalReport $voluntaryNationalReport) {
+                    return optional($voluntaryNationalReport->projectType)->project_type_title;
+                })
                 ->editColumn('attachment', function (VoluntaryNationalReport $voluntaryNationalReport) {
                     return '<a target="_blank" href="'.Storage::url($voluntaryNationalReport->attachment).'" title="Attachment" class="btn btn-icon btn-outline-danger btn-circle btn-sm"/><i class="flaticon2-download"></i></a>';
                 })
@@ -53,7 +57,7 @@ class VoluntaryNationalReportController extends Controller
                     }
                     return $actionBtn;
                 })
-                ->rawColumns(['project_title','username', 'department_name', 'target_value', 'attachment', 'status', 'action'])
+                ->rawColumns(['project_title','project_type_title','username', 'department_name', 'target_value', 'attachment', 'status', 'action'])
                 ->make(true);
         }
         return view('voluntary-national-report.index');
@@ -67,11 +71,12 @@ class VoluntaryNationalReportController extends Controller
     public function create()
     {
         $departments = Department::where('status', 1)->get(['id', 'department_name']);
-        $targets = Target::where('status', 'Active')->get(['id', 'target_value']);
+        $targets = Target::where('status', 'Active')->orderBy('order_no')->get(['id', 'target_value']);
         $projects = Project::where('status', 'Active')->when(auth()->user()->isDepartment(), function($query){
             return $query->where('department_id', auth()->user()->department_id);
         })->get();
-        return view('voluntary-national-report.create', compact('departments','targets', 'projects'));
+        $project_types = ProjectType::where('status', 1)->get();
+        return view('voluntary-national-report.create', compact('departments','targets', 'projects', 'project_types'));
     }
 
     /**
@@ -115,11 +120,12 @@ class VoluntaryNationalReportController extends Controller
     public function edit(VoluntaryNationalReport $voluntaryNationalReport)
     {
         $departments = Department::where('status', 1)->get(['id', 'department_name']);
-        $targets = Target::where('status', 'Active')->get(['id', 'target_value']);
+        $targets = Target::where('status', 'Active')->orderBy('order_no')->get(['id', 'target_value']);
         $projects = Project::where('status', 'Active')->when(auth()->user()->isDepartment(), function($query){
             return $query->where('department_id', auth()->user()->department_id);
         })->get();
-        return view('voluntary-national-report.edit',compact('departments','targets','voluntaryNationalReport', 'projects'));
+        $project_types = ProjectType::where('status', 'Active')->get();
+        return view('voluntary-national-report.edit',compact('departments','targets','voluntaryNationalReport', 'projects', 'project_types'));
     }
 
     /**

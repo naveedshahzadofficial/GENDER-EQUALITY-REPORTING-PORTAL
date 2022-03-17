@@ -76,7 +76,7 @@ class AnnualDevelopmentProjectController extends Controller
             return $query->where('department_id', auth()->user()->department_id);
         })->get();
         $project_types = ProjectType::where('status', 1)->get();
-        $targets = Target::where('status', 'Active')->get();
+        $targets = Target::where('status', 'Active')->orderBy('order_no')->get();
         return view('annual-development-projects.create', compact('departments', 'projects', 'project_types', 'targets'));
     }
 
@@ -143,7 +143,7 @@ class AnnualDevelopmentProjectController extends Controller
             return $query->where('department_id', auth()->user()->department_id);
         })->get();
         $project_types = ProjectType::where('status', 'Active')->get();
-        $targets = Target::where('status', 'Active')->get();
+        $targets = Target::where('status', 'Active')->orderBy('order_no')->get();
         return view('annual-development-projects.edit', compact('departments', 'projects', 'project_types', 'annualDevelopmentProject', 'targets'));
     }
 

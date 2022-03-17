@@ -50,6 +50,13 @@
                                     <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                <div class="col-lg-6">
+                                    <label>Order No.<span class="color-red-700">*</span></label>
+                                    <input type="number" min="1" name="order_no" style="width: 100% !important;" class="form-control" placeholder="Order No" value="{{ old('order_no') }}" />
+                                    @error('order_no')
+                                    <div class="error">{{ $message }}</div>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
                         <div class="card-footer">
@@ -87,6 +94,13 @@
                             validators: {
                                 notEmpty: {
                                     message: 'Factor is required'
+                                }
+                            }
+                        },
+                        order_no: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Order No. is required'
                                 }
                             }
                         },

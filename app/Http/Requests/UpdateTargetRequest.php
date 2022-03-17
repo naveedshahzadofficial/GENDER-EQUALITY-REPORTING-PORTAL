@@ -26,7 +26,17 @@ class UpdateTargetRequest extends FormRequest
         return [
             'target_value'=>'required|string',
             'target_factor'=>'required|string',
+            'order_no'=>'required|numeric|not_in:0|min:1',
 //            'icon_name'=>'required|mimes:jpg,jpeg,png',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'order_no.numeric' => 'Please enter the valid Order No.',
+            'order_no.not_in' => 'Please enter the valid Order No.',
+            'order_no.min' => 'Please enter the valid Order No.',
         ];
     }
 }

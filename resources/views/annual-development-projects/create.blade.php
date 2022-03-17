@@ -527,9 +527,9 @@
             let project_id = $(obj).val();
             $.post('{{ route('annual-development-projects.find-project') }}', {'project_id': project_id}, function (response){
                 if(response.status){
-                    $('#start_datepicker').val(response.project_start_date)
-                    $('#end_datepicker').val(response.project_end_date)
-                    $('#project_type_id').val(response.project_type_id)
+                    $('#start_datepicker').val(response.project_start_date);
+                    $('#end_datepicker').val(response.project_end_date);
+                    $('#project_type_id').val(response.project_type_id);
                     let template = document.getElementById('budget-table').innerHTML;
                     let rendered = Mustache.render(template, response);
                     document.getElementById('budget-table-data').innerHTML = rendered;
@@ -566,8 +566,9 @@
                     });
 
                 }else{
-                    $('#start_datepicker').val("")
-                    $('#end_datepicker').val("")
+                    $('#start_datepicker').val("");
+                    $('#end_datepicker').val("");
+                    $('#project_type_id').val('');
                     let template = document.getElementById('budget-table').innerHTML;
                     let rendered = Mustache.render(template, response);
                     document.getElementById('budget-table-data').innerHTML = rendered;

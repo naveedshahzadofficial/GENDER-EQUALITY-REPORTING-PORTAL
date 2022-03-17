@@ -45,7 +45,7 @@ class IndicatorController extends Controller
      */
     public function create()
     {
-        $targets = Target::where('status', 'Active')->get();
+        $targets = Target::where('status', 'Active')->orderBy('order_no')->get();
         return view('indicators.create', compact('targets'));
     }
 
@@ -83,7 +83,7 @@ class IndicatorController extends Controller
      */
     public function edit(Indicator $indicator)
     {
-        $targets = Target::where('status', 'Active')->get();
+        $targets = Target::where('status', 'Active')->orderBy('order_no')->get();
         return view('indicators.edit',compact('indicator', 'targets'));
     }
 

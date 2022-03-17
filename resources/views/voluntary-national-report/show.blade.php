@@ -50,12 +50,30 @@
 
                                 <div class="col-md-6">
                                     <div class="static-info row">
-                                        <div class="col-md-6 name"><strong>Start Date:</strong></div>
-                                        <div class="col-md-6 value">{{ $voluntaryNationalReport->start_date }}</div>
+                                        <div class="col-md-6 name"><strong>Project Type:</strong></div>
+                                        <div class="col-md-6 value">{{ optional($voluntaryNationalReport->projectType)->project_type_title }}</div>
                                     </div>
                                 </div>
 
                             </div>
+
+                            <div class="row mt-10">
+                            <div class="col-md-6">
+                                <div class="static-info row">
+                                    <div class="col-md-6 name"><strong>Start Date:</strong></div>
+                                    <div class="col-md-6 value">{{ $voluntaryNationalReport->start_date }}</div>
+                                </div>
+                            </div>
+
+                                <div class="col-md-6">
+                                    <div class="static-info row">
+                                        <div class="col-md-6 name"><strong>End Date:</strong></div>
+                                        <div class="col-md-6 value">{{ $voluntaryNationalReport->end_date }}</div>
+                                    </div>
+                                </div>
+
+                            </div>
+
                             <div class="row mt-10">
                                 <div class="col-md-6">
                                     <div class="static-info row">
@@ -96,12 +114,6 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <div class="static-info row">
-                                        <div class="col-md-6 name"><strong>End Date:</strong></div>
-                                        <div class="col-md-6 value">{{ $voluntaryNationalReport->end_date }}</div>
-                                    </div>
-                                </div>
 
                             </div>
 

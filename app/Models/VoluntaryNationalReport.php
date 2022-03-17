@@ -59,4 +59,8 @@ class VoluntaryNationalReport extends Model
     {
         return $this->belongsTo(Project::class);
     }
+    public function projectType(): BelongsTo
+    {
+        return $this->belongsTo(ProjectType::class);
+    }
 }

@@ -39,8 +39,9 @@
                                     @enderror
                                 </div>
                             </div>
+
                             <div class="row form-group">
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <label>Targets <span class="color-red-700">*</span></label>
                                     <select class="form-control select2" name="target_id">
                                         <option value="">Select Target</option>
@@ -54,7 +55,9 @@
                                     <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
+                            </div>
 
+                            <div class="row form-group">
                                 <div class="col-lg-6">
                                     <label>Policies / Program / Project / Interventions <span class="color-red-700">*</span></label>
                                     <select class="form-control select2" name="project_id" onchange="getProject(this)">
@@ -67,6 +70,20 @@
                                     <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
+
+                                <div class="col-lg-6">
+                                    <label>Project Type <span class="color-red-700">*</span></label>
+                                    <select readonly class="form-control" name="project_type_id" id="project_type_id">
+                                        <option value="">Select Project</option>
+                                        @foreach($project_types as $project_type)
+                                            <option {{ old('project_type_id')== $project_type->id ? 'selected': '' }} value="{{ $project_type->id }}"> {{ $project_type->project_type_title }} </option>
+                                        @endforeach
+                                    </select>
+                                    @error('project_type_id')
+                                    <div class="error">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
                             </div>
                             <div class="row form-group">
 
@@ -158,6 +175,16 @@
     <!--end::Entry-->
 @endsection
 
+@push('post-styles')
+    <style>
+        select[readonly]#project_type_id {
+            pointer-events: none;
+            touch-action: none;
+        }
+    </style>
+@endpush
+
+
 @push('post-scripts')
     <script>
         $(document).ready(function() {
@@ -183,6 +210,13 @@
                             validators: {
                                 notEmpty: {
                                     message: 'Project is required'
+                                }
+                            }
+                        },
+                        project_type_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Project type is required'
                                 }
                             }
                         },
@@ -274,10 +308,12 @@
                 $.post('{{ route('projects.project-ajax') }}', {'project_id': project_id}, function (response) {
                     $('#start_datepicker').val(response.project_start_date);
                     $('#end_datepicker').val(response.project_end_date);
+                    $('#project_type_id').val(response.project_type_id)
                 });
             }else{
                 $('#start_datepicker').val('');
                 $('#end_datepicker').val('');
+                $('#project_type_id').val('')
             }
         }
     </script>

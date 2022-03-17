@@ -39,6 +39,7 @@
                             @endif
                             <th>Target</th>
                             <th>Project</th>
+                            <th>Project Type</th>
                             <th>Start Date</th>
                             <th>End Date</th>
                             <th class="text-center">Status</th>
@@ -91,6 +92,7 @@
                         @endif
                     {data: 'target_value', name: 'target_value'},
                     {data: 'project_title', name: 'project.project_title'},
+                    {data: 'project_type_title', name: 'projectType.project_type_title'},
                     {data: 'start_date', name: 'start_date', class: 'text-center'},
                     {data: 'end_date', name: 'end_date', class: 'text-center'},
                     {data: 'status', name: 'status', class: 'text-center'},
