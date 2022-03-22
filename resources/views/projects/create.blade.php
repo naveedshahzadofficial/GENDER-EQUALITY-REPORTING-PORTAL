@@ -80,6 +80,45 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="row form-group">
+                                <div class="col-lg-12">
+                                    <label>Description<span class="color-red-700"></span></label>
+                                    <textarea class="form-control resize-none" rows="4" name="project_description" placeholder="Project description...">{{ old('project_description') }}</textarea>
+                                    @error('project_description')
+                                    <div class="error">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-lg-6">
+                                    <label>Location of project<span class="text-danger">*</span></label>
+                                    <div class="col-form-label">
+                                        <div class="radio-inline">
+                                            <label class="radio radio-primary"><input type="radio"  name="project_is_all_punjab" value="1" {{ old('project_is_all_punjab')=='1'?'checked':'' }}><span></span>All of Punjab</label>
+                                            <label class="radio radio-primary"><input type="radio" name="project_is_all_punjab" value="0" {{ old('project_is_all_punjab')=='0'?'checked':'' }}><span></span>Specific Location </label>
+                                        </div>
+                                        @error('project_is_all_punjab')
+                                        <div class="error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 {{ old('project_is_all_punjab')=='0'?'':'d-none' }}" id="is_punjab">
+                                    <label>Locations<span class="text-danger">*</span></label>
+                                    <select class="form-control multiple-select2" multiple name="district_ids[]" style="width: 100% !important;">
+                                        @foreach($districts as $district)
+                                            <option {{ is_array(old('district_ids')) && in_array($district->id,old('district_ids')) ? 'selected': '' }} value="{{ $district->id }}"> {{ $district->district_name_e }} </option>
+                                        @endforeach
+                                    </select>
+                                    @error('district_ids')
+                                    <div class="error">{{ $message }}</div>
+                                    @enderror
+
+                                </div>
+
+                            </div>
+
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary custom-btn-form mr-2">Submit</button>
@@ -97,6 +136,85 @@
     </div>
     <!--end::Entry-->
 @endsection
+
+@push('post-styles')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .select2-container {
+        min-width: 400px;
+    }
+
+    .select2-results__option {
+        padding-right: 20px;
+        vertical-align: middle;
+    }
+    .select2-results__option:before {
+        content: "";
+        display: inline-block;
+        position: relative;
+        height: 20px;
+        width: 20px;
+        border: 2px solid #e9e9e9;
+        border-radius: 4px;
+        background-color: #fff;
+        margin-right: 20px;
+        vertical-align: middle;
+    }
+    .select2-results__option[aria-selected=true]:before {
+        font-family:fontAwesome;
+        content: "\f00c";
+        color: #fff;
+        background-color: #ff3a21;
+        border: 0;
+        display: inline-block;
+        padding-left: 3px;
+    }
+    .select2-container--default .select2-results__option[aria-selected=true] {
+        background-color: #fff;
+    }
+    .select2-container--default .select2-results__option--highlighted[aria-selected] {
+        background-color: #eaeaeb;
+        color: #272727;
+    }
+    .select2-container--default .select2-selection--multiple {
+        margin-bottom: 10px;
+    }
+    .select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple {
+        border-radius: 4px;
+    }
+    .select2-container--default.select2-container--focus .select2-selection--multiple {
+        border-color: #ff3a21;
+        border-width: 2px;
+    }
+    .select2-container--default .select2-selection--multiple {
+        border-width: 2px;
+    }
+    .select2-container--open .select2-dropdown--below {
+
+        border-radius: 6px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+
+    }
+    .select2-selection .select2-selection--multiple:after {
+        content: 'hhghgh';
+    }
+    /* select with icons badges single*/
+    .select-icon .select2-selection__placeholder .badge {
+        display: none;
+    }
+    .select-icon .placeholder {
+        /* 	display: none; */
+    }
+    .select-icon .select2-results__option:before,
+    .select-icon .select2-results__option[aria-selected=true]:before {
+        display: none !important;
+        /* content: "" !important; */
+    }
+    .select-icon  .select2-search--dropdown {
+        display: none;
+    }
+</style>
+@endpush
 
 @push('post-scripts')
     <script>
@@ -122,7 +240,7 @@
                         project_start_date: {
                             validators: {
                                 notEmpty: {
-                                    message: 'start date is required'
+                                    message: 'Start date is required'
                                 }
                             }
                         },
@@ -132,7 +250,26 @@
                                     message: 'End date is required'
                                 }
                             }
-                        }
+                        },
+                        project_is_all_punjab: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Project Location is required'
+                                }
+                            }
+                        },
+                        'district_ids[]': {
+                            validators: {
+                                callback: {
+                                    message: 'Please specific the location',
+                                    callback: function(input) {
+                                        const selectedCheckbox = document.getElementById('form_add_edit').querySelector('[name="project_is_all_punjab"]:checked');
+                                        const framework = selectedCheckbox ? selectedCheckbox.value : '';
+                                        return (framework !== '0')? true: (input.value !== '');
+                                    }
+                                }
+                            },
+                        },
                     },
 
                     plugins: {
@@ -150,6 +287,25 @@
                     }
                 }
             );
+
+            $(".multiple-select2").select2({
+                closeOnSelect : false,
+                placeholder : "Select Location",
+                // allowHtml: true,
+                allowClear: true,
+            });
+
+            $("input[name='project_is_all_punjab']").on('change', function (){
+                let is_punjab = $("input[name='project_is_all_punjab']:checked").val();
+                if(is_punjab == 1)
+                {
+                    $('#is_punjab').addClass('d-none');
+                }
+                else
+                {
+                    $('#is_punjab').removeClass('d-none');
+                }
+            });
 
         });
     </script>

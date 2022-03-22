@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use App\Models\District;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\ProjectType;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 
 class ProjectController extends Controller
@@ -55,9 +55,9 @@ class ProjectController extends Controller
     public function create()
     {
         $project_types = ProjectType::where('status', 1)->get();
-//        $departments = Department::where('status', 1)->get();
         $departments = Department::where('status', 1)->get();
-        return view('projects.create', compact('project_types', 'departments'));
+        $districts = District::where('district_status',1)->where('province_id',7)->get();
+        return view('projects.create', compact('project_types', 'departments', 'districts'));
     }
 
     /**
@@ -70,7 +70,12 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
         $data['status'] = "Active";
-        Project::create($data);
+        $project = Project::create($data);
+        if($project->project_is_all_punjab==1){
+            $data['district_ids'] = [];
+        }
+        $project->locations()->sync($data['district_ids']??[]);
+
         return redirect()
             ->route('projects.index')
             ->with('success_message', 'Project has been added successfully.');
@@ -95,9 +100,11 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        $project->load('locations');
         $project_types = ProjectType::where('status', 1)->get();
         $departments = Department::where('status', 1)->get();
-        return view('projects.edit',compact('project', 'project_types', 'departments'));
+        $districts = District::where('district_status',1)->where('province_id',7)->get();
+        return view('projects.edit',compact('project', 'project_types', 'departments', 'districts'));
 
     }
 
@@ -112,6 +119,10 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
         $project->update($data);
+        if($project->project_is_all_punjab==1){
+            $data['district_ids'] = [];
+        }
+        $project->locations()->sync($data['district_ids']??[]);
         return redirect()
             ->route('projects.index')
             ->with('success_message', 'Project has been updated successfully.');

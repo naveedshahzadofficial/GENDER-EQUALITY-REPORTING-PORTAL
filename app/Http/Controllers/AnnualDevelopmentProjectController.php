@@ -49,6 +49,12 @@ class AnnualDevelopmentProjectController extends Controller
                 ->editColumn('status', function (AnnualDevelopmentProject $annualDevelopmentProject) {
                     return '<span class="label label-lg font-weight-bold label-inline '.($annualDevelopmentProject->status == '1'?'label-light-success':'label-light-danger').'">'.($annualDevelopmentProject->status?'Active':'Inactive').'</span>';
                 })
+                ->editColumn('total_approved_budget', function (AnnualDevelopmentProject $annualDevelopmentProject) {
+                    return number_format($annualDevelopmentProject->total_approved_budget);
+                })
+                ->editColumn('total_expenditure', function (AnnualDevelopmentProject $annualDevelopmentProject) {
+                    return number_format($annualDevelopmentProject->total_expenditure);
+                })
                 ->addColumn('action', function(AnnualDevelopmentProject $annualDevelopmentProject){
                     $actionBtn = '<a target="_blank" href="' . route('annual-development-projects.show', $annualDevelopmentProject) . '" class="btn btn-icon btn-circle btn-xs mr-2 btn-outline-danger" title="Detail"> <i class="icon-md fas fa-eye"></i> </a>';
                     if (auth()->user()->isDepartment()) {
